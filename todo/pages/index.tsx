@@ -1,17 +1,20 @@
 import type { NextPage } from "next";
+import { type } from "os";
 import Button from "../components/Button";
 import Todo from "../components/Todo";
 
 const Home: NextPage = () => {
 
-  type Todos = { id: number; name: string };
+  type Todo = { id: number; name: string }
 
-  const todos: Todos = { id: 1, name: "Take the children from school at 3PM" };
+  type Todos = [Todo][];
+
+  const todos: Todos = [];
 
   return (
     <div>
       <Button buttonName={"add todo"} />
-      <Todo todo={todos}/>
+      {/* <Todo todo={todos}/> */}
     </div>
   );
 };
