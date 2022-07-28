@@ -1,0 +1,37 @@
+.navigation {
+    background-color: rgb(241, 233, 233);
+    border-radius: .5rem;
+    box-shadow: .5rem .3rem .3rem rgb(107, 107, 107);
+}
+
+.link_name {
+    
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.links {
+    list-style-type: none;
+    margin: 0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* .first_link {
+    padding-right: 0.5rem;
+} */
+
+.link {
+    text-decoration: none;
+    color: rgb(83, 77, 77);
+    padding: .5rem;
+    border-radius: .3rem;
+}
+
+.link:hover {
+    background-color: rgb(229, 226, 226);
+}
