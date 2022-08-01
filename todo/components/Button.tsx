@@ -1,13 +1,14 @@
 import React from "react"
 
 type ButtonProp = {
-    buttonName: String
+    buttonName: String,
+    addTodo: Function
 }
 
-const Button: React.FunctionComponent<ButtonProp> = ({buttonName}) => {
+const Button: React.FunctionComponent<ButtonProp> = ({buttonName, addTodo}) => {
     
   return (
-    <button>{buttonName}</button>
+    <button onClick={() => addTodo()}>{buttonName}</button>
   )
 }
 
