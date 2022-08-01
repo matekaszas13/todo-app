@@ -15,12 +15,17 @@ const Home: NextPage = () => {
   const [inputValue, setInputValue] = useState<string>("");
 
   function addTodo() {
-    let newTodo: Todo = { id: currentId, name: inputValue };
-    setTodos((currentTodos) => {
-      const newTodos = [...currentTodos, newTodo];
-      return newTodos;
-    });
-    setId(currentId + 1);
+    if (inputValue !== "") {
+      let newTodo: Todo = { id: currentId, name: inputValue };
+      setTodos((currentTodos) => {
+        const newTodos = [...currentTodos, newTodo];
+        return newTodos;
+      });
+      setId(currentId + 1);
+      setInputValue("");
+    } else {
+      alert("Write your plan");
+    }
   }
 
   useEffect(() => {
@@ -34,13 +39,23 @@ const Home: NextPage = () => {
           className={styles.input_plan}
           placeholder="Your plan goes here.."
           type="text"
+          value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
         />
-        <Button className={styles.add_btn} buttonName={"add todo"} addTodo={addTodo} />
+        <Button
+          className={styles.add_btn}
+          buttonName={"add todo"}
+          addTodo={addTodo}
+        />
       </div>
       <div className={styles.todos}>
         {todos.map((todo) => (
-          <Todo className={styles.single_todo} key={todo.id} id={todo.id} name={todo.name} />
+          <Todo
+            className={styles.single_todo}
+            key={todo.id}
+            id={todo.id}
+            name={todo.name}
+          />
         ))}
       </div>
     </div>
