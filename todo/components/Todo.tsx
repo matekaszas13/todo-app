@@ -1,15 +1,15 @@
-type Todos = { id: number; name: string };
-
-interface MyTodos {
-    todo: Todos
+interface Todo {
+  id: number;
+  name: string;
 }
 
-const Todo = ({todo}: MyTodos) => {
+const Todo : React.FC<Todo> = ({id, name} : Todo) => {
+
   return (
-    <div>
-        <span>{todo.name}</span>
+    <div id={id.toString()}>
+      <span>{name}</span>
     </div>
-  )
-}
+  );
+};
 
-export default Todo
+export default Todo;
