@@ -24,14 +24,25 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    console.log(todos)
+    console.log(todos);
   }, [todos]);
 
   return (
     <div>
-      <input className={styles.input_plan} placeholder="Your plan goes here.." type="text" onChange={(event) => setInputValue(event.target.value)} />
-      <Button buttonName={"add todo"} addTodo={addTodo} />
-      {todos.map(todo => <Todo key={todo.id} id={todo.id} name={todo.name}/>)}
+      <div className={styles.content}>
+        <input
+          className={styles.input_plan}
+          placeholder="Your plan goes here.."
+          type="text"
+          onChange={(event) => setInputValue(event.target.value)}
+        />
+        <Button className={styles.add_btn} buttonName={"add todo"} addTodo={addTodo} />
+      </div>
+      <div>
+        {todos.map((todo) => (
+          <Todo key={todo.id} id={todo.id} name={todo.name} />
+        ))}
+      </div>
     </div>
   );
 };
