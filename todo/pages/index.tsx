@@ -16,7 +16,6 @@ const Home: NextPage = () => {
   function addTodo() {
     let newTodo: Todo = { id: currentId, name: inputValue };
     setTodos((currentTodos) => {
-      console.log(currentTodos)
       const newTodos = [...currentTodos, newTodo];
       return newTodos;
     });
