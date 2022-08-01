@@ -38,9 +38,9 @@ const Home: NextPage = () => {
         />
         <Button className={styles.add_btn} buttonName={"add todo"} addTodo={addTodo} />
       </div>
-      <div>
+      <div className={styles.todos}>
         {todos.map((todo) => (
-          <Todo key={todo.id} id={todo.id} name={todo.name} />
+          <Todo className={styles.single_todo} key={todo.id} id={todo.id} name={todo.name} />
         ))}
       </div>
     </div>
