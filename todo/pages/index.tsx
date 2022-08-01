@@ -3,6 +3,7 @@ import { type } from "os";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Todo from "../components/Todo";
+import styles from "../styles/Index.module.css";
 
 const Home: NextPage = () => {
   type Todo = { id: number; name: string };
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <input type="text" onChange={(event) => setInputValue(event.target.value)} />
+      <input className={styles.input_plan} placeholder="Your plan goes here.." type="text" onChange={(event) => setInputValue(event.target.value)} />
       <Button buttonName={"add todo"} addTodo={addTodo} />
       {todos.map(todo => <Todo key={todo.id} id={todo.id} name={todo.name}/>)}
     </div>
