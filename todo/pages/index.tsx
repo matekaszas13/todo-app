@@ -6,7 +6,7 @@ import Todo from "../components/Todo";
 import styles from "../styles/Index.module.css";
 
 const Home: NextPage = () => {
-  type Todo = { id: number; name: string };
+  type Todo = { id: number; name: string; isFavourite: boolean };
 
   const [currentId, setId] = useState<number>(1);
 
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 
   function addTodo() {
     if (inputValue !== "") {
-      let newTodo: Todo = { id: currentId, name: inputValue };
+      let newTodo: Todo = { id: currentId, name: inputValue, isFavourite: false };
       setTodos((currentTodos) => {
         const newTodos = [...currentTodos, newTodo];
         return newTodos;
@@ -28,8 +28,8 @@ const Home: NextPage = () => {
     }
   }
 
-  function deleteTodo(id: number){
-    const FilteredTodos: Todo[] = todos.filter(todo => todo.id !== id)
+  function deleteTodo(id: number) {
+    const FilteredTodos: Todo[] = todos.filter((todo) => todo.id !== id);
     setTodos(FilteredTodos);
   }
 
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
       <div className={styles.todos}>
         {todos.map((todo) => (
           <Todo
-          deleteToDo={deleteTodo}
+            deleteToDo={deleteTodo}
             className={styles.single_todo}
             key={todo.id}
             id={todo.id}
