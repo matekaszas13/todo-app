@@ -6,7 +6,7 @@ import Todo from "../components/Todo";
 import styles from "../styles/Index.module.css";
 
 const Home: NextPage = () => {
-  type Todo = { id: number; name: string };
+  type Todo = { id: number; name: string; isFavourite: boolean };
 
   const [currentId, setId] = useState<number>(1);
 
@@ -15,12 +15,34 @@ const Home: NextPage = () => {
   const [inputValue, setInputValue] = useState<string>("");
 
   function addTodo() {
-    let newTodo: Todo = { id: currentId, name: inputValue };
-    setTodos((currentTodos) => {
-      const newTodos = [...currentTodos, newTodo];
-      return newTodos;
-    });
-    setId(currentId + 1);
+    if (inputValue !== "") {
+      let newTodo: Todo = {
+        id: currentId,
+        name: inputValue,
+        isFavourite: false,
+      };
+      setTodos((currentTodos) => {
+        const newTodos = [...currentTodos, newTodo];
+        return newTodos;
+      });
+      setId(currentId + 1);
+      setInputValue("");
+    } else {
+      alert("Write your plan");
+    }
+  }
+
+  function deleteTodo(id: number) {
+    const filteredTodos: Todo[] = todos.filter((todo) => todo.id !== id);
+    setTodos(filteredTodos);
+  }
+
+  function setCheckBox(id: number) {
+    const todo: Todo | undefined = todos.find((todo) => todo.id === id);
+    todo?.isFavourite === false
+      ? (todo.isFavourite = true)
+      : (todo.isFavourite = false);
+    console.log(todos);
   }
 
   useEffect(() => {
@@ -34,13 +56,26 @@ const Home: NextPage = () => {
           className={styles.input_plan}
           placeholder="Your plan goes here.."
           type="text"
+          value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
         />
-        <Button className={styles.add_btn} buttonName={"add todo"} addTodo={addTodo} />
+        <Button
+          className={styles.add_btn}
+          buttonName={"add todo"}
+          addTodo={addTodo}
+        />
       </div>
       <div className={styles.todos}>
         {todos.map((todo) => (
-          <Todo className={styles.single_todo} key={todo.id} id={todo.id} name={todo.name} />
+          <Todo
+            changeCheckBoxValue={setCheckBox}
+            isFavourite={todo.isFavourite}
+            deleteToDo={deleteTodo}
+            className={styles.single_todo}
+            key={todo.id}
+            id={todo.id}
+            name={todo.name}
+          />
         ))}
       </div>
     </div>

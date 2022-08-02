@@ -1,0 +1,10 @@
+.todo_text {
+    display:block;
+    width: 90%;
+    word-wrap:break-word;
+}
+
+
+.delete_icon {
+    cursor: pointer;
+}

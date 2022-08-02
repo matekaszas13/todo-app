@@ -41,6 +41,8 @@
     box-shadow: .2rem .2rem  rgb(175, 175, 175);
 }
 
-.todos {
-
+.single_todo {
+  display: flex;
+  justify-content: space-between;
 }
+
