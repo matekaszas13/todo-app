@@ -16,7 +16,11 @@ const Home: NextPage = () => {
 
   function addTodo() {
     if (inputValue !== "") {
-      let newTodo: Todo = { id: currentId, name: inputValue, isFavourite: false };
+      let newTodo: Todo = {
+        id: currentId,
+        name: inputValue,
+        isFavourite: false,
+      };
       setTodos((currentTodos) => {
         const newTodos = [...currentTodos, newTodo];
         return newTodos;
@@ -29,8 +33,14 @@ const Home: NextPage = () => {
   }
 
   function deleteTodo(id: number) {
-    const FilteredTodos: Todo[] = todos.filter((todo) => todo.id !== id);
-    setTodos(FilteredTodos);
+    const filteredTodos: Todo[] = todos.filter((todo) => todo.id !== id);
+    setTodos(filteredTodos);
+  }
+
+  function setCheckBox(id: number){
+    const todo: Todo | undefined = todos.find((todo) => todo.id === id);
+    todo.isFavourite === false ? todo.isFavourite = true:  todo.isFavourite = false;
+    console.log(todos)
   }
 
   useEffect(() => {
@@ -56,6 +66,8 @@ const Home: NextPage = () => {
       <div className={styles.todos}>
         {todos.map((todo) => (
           <Todo
+          changeCheckBoxValue={setCheckBox}
+            isFavourite={todo.isFavourite}
             deleteToDo={deleteTodo}
             className={styles.single_todo}
             key={todo.id}
