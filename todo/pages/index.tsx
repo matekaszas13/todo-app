@@ -28,6 +28,11 @@ const Home: NextPage = () => {
     }
   }
 
+  function deleteTodo(id: number){
+    const FilteredTodos: Todo[] = todos.filter(todo => todo.id !== id)
+    setTodos(FilteredTodos);
+  }
+
   useEffect(() => {
     console.log(todos);
   }, [todos]);
@@ -51,6 +56,7 @@ const Home: NextPage = () => {
       <div className={styles.todos}>
         {todos.map((todo) => (
           <Todo
+          deleteToDo={deleteTodo}
             className={styles.single_todo}
             key={todo.id}
             id={todo.id}
