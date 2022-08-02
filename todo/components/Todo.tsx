@@ -6,15 +6,17 @@ import styles from '../styles/Todo.module.css';
 interface Todo {
   id: number;
   name: string;
+  isFavourite: boolean;
   className: string;
   deleteToDo: Function;
 }
 
-const Todo : React.FC<Todo> = ({id, name, className, deleteToDo} : Todo) => {
+const Todo : React.FC<Todo> = ({id, name, className, deleteToDo, isFavourite} : Todo) => {
 
   return (
     <div className={className} id={id.toString()}>
       <span className={styles.todo_text}>{name}</span>
+      <input type="checkbox" checked={isFavourite} />
       <FontAwesomeIcon onClick={() => deleteToDo(id)} className={styles.delete_icon} icon={faTrash}/>
     </div>
   );
