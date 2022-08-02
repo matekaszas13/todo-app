@@ -14,7 +14,7 @@ const Todo : React.FC<Todo> = ({id, name, className} : Todo) => {
   return (
     <div className={className} id={id.toString()}>
       <span className={styles.todo_text}>{name}</span>
-      <FontAwesomeIcon icon={faTrash}/>
+      <FontAwesomeIcon className={styles.delete_icon} icon={faTrash}/>
     </div>
   );
 };
