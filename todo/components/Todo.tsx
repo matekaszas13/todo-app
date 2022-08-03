@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/Todo.module.css";
 
 interface Todo {
@@ -28,6 +28,7 @@ const Todo: React.FC<Todo> = ({
         className={styles.delete_icon}
         icon={faTrash}
       />
+      <FontAwesomeIcon className={styles.edit_icon} icon={faPencilAlt}/>
     </div>
   );
 };
