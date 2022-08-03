@@ -8,7 +8,7 @@ import styles from "../styles/Index.module.css";
 const Home: NextPage = () => {
   type Todo = { id: number; name: string; isCompleted: boolean };
 
-  const [currentId, setId] = useState<number>(1);
+  const [id, setId] = useState<number>(1);
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   function addTodo() {
     if (inputValue !== "") {
       let newTodo: Todo = {
-        id: currentId,
+        id: id,
         name: inputValue,
         isCompleted: false,
       };
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
         const newTodos = [...currentTodos, newTodo];
         return newTodos;
       });
-      setId(currentId + 1);
+      setId(currentId => currentId + 1);
       setInputValue("");
     } else {
       alert("Write your plan");
