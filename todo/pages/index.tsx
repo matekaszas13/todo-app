@@ -6,7 +6,7 @@ import Todo from "../components/Todo";
 import styles from "../styles/Index.module.css";
 
 const Home: NextPage = () => {
-  type Todo = { id: number; name: string; isFavourite: boolean };
+  type Todo = { id: number; name: string; isCompleted: boolean };
 
   const [currentId, setId] = useState<number>(1);
 
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       let newTodo: Todo = {
         id: currentId,
         name: inputValue,
-        isFavourite: false,
+        isCompleted: false,
       };
       setTodos((currentTodos) => {
         const newTodos = [...currentTodos, newTodo];
@@ -39,9 +39,9 @@ const Home: NextPage = () => {
 
   function setCheckBox(id: number) {
     const todo: Todo | undefined = todos.find((todo) => todo.id === id);
-    todo?.isFavourite === false
-      ? (todo.isFavourite = true)
-      : (todo.isFavourite = false);
+    todo?.isCompleted === false
+      ? (todo.isCompleted = true)
+      : (todo.isCompleted = false);
     console.log(todos);
   }
 
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
         {todos.map((todo) => (
           <Todo
             changeCheckBoxValue={setCheckBox}
-            isFavourite={todo.isFavourite}
+            isCompleted={todo.isCompleted}
             deleteToDo={deleteTodo}
             className={styles.single_todo}
             key={todo.id}
