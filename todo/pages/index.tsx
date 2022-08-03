@@ -38,11 +38,14 @@ const Home: NextPage = () => {
   }
 
   function setCheckBox(id: number) {
-    const todo: Todo | undefined = todos.find((todo) => todo.id === id);
-    todo?.isCompleted === false
-      ? (todo.isCompleted = true)
-      : (todo.isCompleted = false);
-    console.log(todos);
+    setTodos((currentTodos) => {
+      return currentTodos.map(todo => {
+        if(todo.id === id) {
+          return {...todo, isCompleted : !todo.isCompleted}
+        }
+        return todo;
+      });
+    });
   }
 
   useEffect(() => {
