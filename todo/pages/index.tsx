@@ -48,6 +48,17 @@ const Home: NextPage = () => {
     });
   }
 
+  function setNewNameForOneTodo(id: number, newName: string){
+    setTodos((currentTodos) => {
+      return currentTodos.map(todo => {
+        if(todo.id === id) {
+          return {...todo, name : newName}
+        }
+        return todo;
+      });
+    });
+  }
+
   useEffect(() => {
     console.log(todos);
   }, [todos]);
