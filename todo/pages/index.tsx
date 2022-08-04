@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { type } from "os";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Todo from "../components/Todo";
@@ -82,6 +81,7 @@ const Home: NextPage = () => {
       <div className={styles.todos}>
         {todos.map((todo) => (
           <Todo
+          addNewNameForOneTodo={setNewNameForOneTodo}
             changeCheckBoxValue={setCheckBox}
             isCompleted={todo.isCompleted}
             deleteToDo={deleteTodo}
