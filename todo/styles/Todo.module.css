@@ -7,4 +7,10 @@
 
 .delete_icon {
     cursor: pointer;
+    margin-left: .4rem;
+}
+
+.edit_icon {
+    cursor: pointer;
+    margin-left: .4rem;
 }

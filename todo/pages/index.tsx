@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
-import { type } from "os";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Todo from "../components/Todo";
 import styles from "../styles/Index.module.css";
 
 const Home: NextPage = () => {
-  type Todo = { id: number; name: string; isFavourite: boolean };
+  type Todo = { id: number; name: string; isCompleted: boolean };
 
-  const [currentId, setId] = useState<number>(1);
+  const [id, setId] = useState<number>(1);
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
@@ -17,15 +16,15 @@ const Home: NextPage = () => {
   function addTodo() {
     if (inputValue !== "") {
       let newTodo: Todo = {
-        id: currentId,
+        id: id,
         name: inputValue,
-        isFavourite: false,
+        isCompleted: false,
       };
       setTodos((currentTodos) => {
         const newTodos = [...currentTodos, newTodo];
         return newTodos;
       });
-      setId(currentId + 1);
+      setId(currentId => currentId + 1);
       setInputValue("");
     } else {
       alert("Write your plan");
@@ -38,11 +37,25 @@ const Home: NextPage = () => {
   }
 
   function setCheckBox(id: number) {
-    const todo: Todo | undefined = todos.find((todo) => todo.id === id);
-    todo?.isFavourite === false
-      ? (todo.isFavourite = true)
-      : (todo.isFavourite = false);
-    console.log(todos);
+    setTodos((currentTodos) => {
+      return currentTodos.map(todo => {
+        if(todo.id === id) {
+          return {...todo, isCompleted : !todo.isCompleted}
+        }
+        return todo;
+      });
+    });
+  }
+
+  function setNewNameForOneTodo(id: number, newName: string){
+    setTodos((currentTodos) => {
+      return currentTodos.map(todo => {
+        if(todo.id === id) {
+          return {...todo, name : newName}
+        }
+        return todo;
+      });
+    });
   }
 
   useEffect(() => {
@@ -68,8 +81,9 @@ const Home: NextPage = () => {
       <div className={styles.todos}>
         {todos.map((todo) => (
           <Todo
+          addNewNameForOneTodo={setNewNameForOneTodo}
             changeCheckBoxValue={setCheckBox}
-            isFavourite={todo.isFavourite}
+            isCompleted={todo.isCompleted}
             deleteToDo={deleteTodo}
             className={styles.single_todo}
             key={todo.id}
