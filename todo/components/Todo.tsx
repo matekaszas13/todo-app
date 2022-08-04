@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/Todo.module.css";
 import { useEffect, useState } from "react";
+import Popup from "./Popup";
 
 interface Todo {
   id: number;
@@ -23,12 +24,16 @@ const Todo: React.FC<Todo> = ({
 
   const [completedText, setCompletedText] = useState<string>("not Completed");
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   useEffect(() => {
     isCompleted ? setCompletedText("Completed") : setCompletedText("not Completed");
   }, [isCompleted]);
 
   return (
-    <div className={className} id={id.toString()}>
+    <div>
+      {isOpen && <Popup setIsOpen={setIsOpen}/>}
+      <div className={className} id={id.toString()}>
       <span className={styles.todo_text}>{name}</span>
       <span>{completedText}</span>
       <input type="checkbox" checked={isCompleted} onChange={() => changeCheckBoxValue(id)}/>
@@ -37,8 +42,10 @@ const Todo: React.FC<Todo> = ({
         className={styles.delete_icon}
         icon={faTrash}
       />
-      <FontAwesomeIcon className={styles.edit_icon} icon={faPencilAlt}/>
+      <FontAwesomeIcon onClick={() => setIsOpen(true)} className={styles.edit_icon} icon={faPencilAlt}/>
     </div>
+    </div>
+    
   );
 };
 
