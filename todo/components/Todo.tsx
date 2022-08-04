@@ -11,6 +11,7 @@ interface Todo {
   className: string;
   deleteToDo: Function;
   changeCheckBoxValue: Function;
+  addNewNameForOneTodo: Function;
 }
 
 const Todo: React.FC<Todo> = ({
@@ -19,7 +20,8 @@ const Todo: React.FC<Todo> = ({
   className,
   deleteToDo,
   isCompleted,
-  changeCheckBoxValue
+  changeCheckBoxValue,
+  addNewNameForOneTodo
 }: Todo) => {
 
   const [completedText, setCompletedText] = useState<string>("not Completed");
@@ -32,7 +34,7 @@ const Todo: React.FC<Todo> = ({
 
   return (
     <div>
-      {isOpen && <Popup setIsOpen={setIsOpen}/>}
+      {isOpen && <Popup id={id} setNewNameForOneTodo={addNewNameForOneTodo} setIsOpen={setIsOpen}/>}
       <div className={className} id={id.toString()}>
       <span className={styles.todo_text}>{name}</span>
       <span>{completedText}</span>
